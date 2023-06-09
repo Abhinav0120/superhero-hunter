@@ -18,8 +18,17 @@
                 <input type="text" id="input-value">
                 <button id="search-button"> Search </button>
             </div>
-            
         </section>
+        <div id="auto-results-container">
+            <div class="auto-result">
+                <!-- <div class="character-img-container">
+                    <img class="character-img" src="http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0.jpg" alt="Super Hero">
+                </div>
+                <div class="character-desc">
+                    name type year
+                </div> -->
+            </div>
+        </div>
         <section id="gallery-section">
             <div id="search-result">
                 <div id="superhero-img-container">
@@ -30,7 +39,7 @@
                         <button id="description-button">
                             info
                         </button>
-                        <button>
+                        <button id="comics-button">
                             comics
                         </button>
                     </div>
@@ -68,11 +77,29 @@
 
         
     </main>
-    <aside>
+    <aside id="aside">
+        <span id="asid-header">
+            Favorite
+        </span>
 
+        <div class="favorite">
+            <div class="fav-img-container">
+                <img class="fav-img" src="http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg" alt="">
+            </div>
+            <div class="fav-desc">
+                <span>
+                    suprehero-name
+                </span>
+                <button>
+                    Remove
+                </button>
+            </div>
+        </div>
     </aside>
     <script src="onload.js"></script>
     <script src="script.js"></script>
     <script src="data.js"></script>
+    <script src="infoToggle.js"></script>
+    <script src="autoSearch.js"></script>
 </body>
 </html>

@@ -2,17 +2,16 @@ const getCharacter = document.getElementById('search-button');
 const inputValue = document.getElementById('input-value');
 const superheroImgContainer = document.getElementById('superhero-img-container');
 const searchResult = document.getElementById('search-result');
+const autoResultsContainer = document.getElementById('auto-results-container');
 
 let date = new Date();
 console.log(date.getTime());
 
 function findSuperHero(){
-
-    // let xhrRequest = new XMLHttpRequest();
     
-    // xhrRequest.onload = function(){
-    //     console.log(xhrRequest.response);
-    // }
+    if(autoResultsContainer.style.display != 'none'){
+        autoResultsContainer.style.display = 'none';
+    }
 
     let characterName = inputValue.value.trim();
     if(characterName === ''){
@@ -24,10 +23,6 @@ function findSuperHero(){
     const apiKey = publicKey; 
     const hashValue = hashVal;
     const url = `https://gateway.marvel.com/v1/public/characters?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}&nameStartsWith=${characterName}`;
-    // const url = `https://gateway.marvel.com/v1/public/characters?apikey=${apiKey}`;
-
-    // xhrRequest.open('get', url);
-    // xhrRequest.send();
 
     fetch(url)
     .then((response) =>{
@@ -56,16 +51,13 @@ function findSuperHero(){
         })
         .then((characterData) => {
             const thumbnailUrl = characterData.data.results[0].thumbnail.path + '.' + characterData.data.results[0].thumbnail.extension;
-            // const characterImage = document.createElement('img');
-            // characterImage.src = thumbnailUrl;
-            // superheroImgContainer.appendChild(characterImage);
+
             searchResult.style.display = 'flex';
             superheroImgContainer.innerHTML = ` 
                 <img id="superhero-img" src="${thumbnailUrl}" alt="Super hero">
             `
 
             const descriptionContainer = document.getElementById('description-container');
-            // const description = document.getElementById('description');
             let characterDescription = characterData.data.results[0].description;
             if(!characterDescription){
                 characterDescription = "Information is Classified";

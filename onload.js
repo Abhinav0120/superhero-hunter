@@ -40,11 +40,13 @@
                 const thubmnailImage = document.createElement('img');
                 thubmnailImage.src = thumbnailUrl;
                 thubmnailImage.classList.add('superhero-Thumbnail');
+                thubmnailImage.setAttribute('data-value',`${superhero.name}`);
 
                 // create a heading element for the superhero's name
                 const nameHeading = document.createElement('h3');
                 nameHeading.classList.add('suprehero-name');
                 nameHeading.textContent = superhero.name;
+                nameHeading.setAttribute('data-value', `${superhero.name}`);
 
                 //append thubmnailImage and name to superheroContainer
                 superheroContainer.appendChild(thubmnailImage);
@@ -54,12 +56,21 @@
                 superHeroGallery.appendChild(superheroContainer);
                 
             })
+
         })
         .catch((error)=>{
             console.error(error);
         })
     }
-
     onload();
+
+    superHeroGallery.addEventListener('click', function(event){
+        let target = event.target;
+        let name = target.getAttribute('data-value');
+
+        inputValue.value = name;
+        findSuperHero();
+        console.log(target);
+    });
 
 })();

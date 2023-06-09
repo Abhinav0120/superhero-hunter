@@ -58,6 +58,39 @@ main #search-section{
     border: none;
 }
 
+/* auto search result */
+#auto-results-container{
+    position: absolute;
+    left: 15px;
+    width: 30vw;
+    max-height: 50vh;
+    overflow: scroll;
+    background-color: grey;
+    display: none;
+    /* z-index: 1; */
+}
+
+#auto-results-container .auto-result{
+    width: 100%;
+    height: 60px;
+    background-color: lightgray;
+    display: flex;
+}
+
+#auto-results-container .character-img-container{
+    width: 60px;
+    height: 60px;
+    background-color: white;
+}
+
+#auto-results-container .character-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
 /*---- search result -----*/
 #search-result{
     height: 350px;
@@ -90,13 +123,17 @@ main #search-section{
     justify-content: space-around;
 }
 
-#info #description-container{
-    display: none;
+#info #options{
     height: 10%;
 }
 
+#info #description-container{
+    /* display: none; */
+    height: 80%;
+}
+
 #info #comics-container{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     width: 100%;
     height: 80%;
@@ -130,7 +167,7 @@ main #search-section{
 /* ---- gallery section ---- */
 
 #gallery-section{
-    height: 90%;
+    height: 86%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -154,7 +191,39 @@ main #search-section{
 /* ---- aside ---- */
 aside{
     width: 30%;
-    height: 92%;
+    height: 90vh;
     background-color: blueviolet;
     
+}
+
+aside #asid-header{
+    font-size: 2rem;
+
+}
+
+aside .favorite{
+    display: flex;
+    width: 80%;
+    background-color: rgb(101, 207, 172);
+    justify-content: space-between;
+    margin: auto;
+}
+
+.favorite .fav-img-container{
+    width: 100px;
+    height: 100px;
+}
+
+.fav-img-container .fav-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite .fav-desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+    width: 60%;
 }
