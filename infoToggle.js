@@ -7,7 +7,7 @@
 
     options.addEventListener('click', function(event){
         let target = event.target;
-        console.log(target);
+        // console.log(target);
         if(target == descriptionButton){
             comics.style.display = 'none';
             description.style.display = 'block';

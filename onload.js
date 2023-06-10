@@ -1,11 +1,34 @@
 (() => { 
     superHeroGallery = document.getElementById('gallery-section');
 
-    const ts = '1686007360659';
-    const publicKey = '0bcbedd6b749ca1b9f3a3cbd4d3118c4';
-    const hashVal = '410f54114af2ae847e0c490c47c9f1db';
 
     function onload(){
+        // for rendering favorite super heros
+        let list = favoriteList;
+        console.log(list);
+        list.forEach((superhero) => {
+            const thumbnailUrl = superhero.thumbnailUrl;
+            const characterName = superhero.characterName;
+
+            const favorite = document.createElement('div');  
+            favorite.innerHTML = `
+                <div class="favorite">
+                    <div class="fav-img-container">
+                        <img class="fav-img" src="${thumbnailUrl}" alt="">
+                    </div>
+                    <div class="fav-desc">
+                        <span>
+                            ${characterName}
+                        </span>
+                        <button>
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            `
+            favoriteContainer.appendChild(favorite);
+        });
+
         const timeStamp = ts;
         const apiKey = publicKey; 
         const hashValue = hashVal;
@@ -26,7 +49,7 @@
                 return;
             }
 
-            console.log(data);
+            // console.log(data);
 
             const superheroes = data.data.results;
 
@@ -54,13 +77,12 @@
 
                 // append the superherocontainer to the superHeroGallery
                 superHeroGallery.appendChild(superheroContainer);
-                
-            })
+            });
 
         })
         .catch((error)=>{
             console.error(error);
-        })
+        });
     }
     onload();
 
@@ -70,7 +92,7 @@
 
         inputValue.value = name;
         findSuperHero();
-        console.log(target);
+        // console.log(target);
     });
 
 })();

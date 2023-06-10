@@ -3,9 +3,22 @@ const inputValue = document.getElementById('input-value');
 const superheroImgContainer = document.getElementById('superhero-img-container');
 const searchResult = document.getElementById('search-result');
 const autoResultsContainer = document.getElementById('auto-results-container');
+let addFavoriteButton = document.getElementById('add-favorite-button');
+const favoriteContainer = document.getElementById('favorite-container');
 
 let date = new Date();
-console.log(date.getTime());
+// console.log(date.getTime());
+let favoriteList = [];
+// localStorage.setItem('favoriteList',JSON.stringify(favoriteList));
+
+const storedData = localStorage.getItem('favoriteList');
+if (storedData !== null) {
+    console.log('localStorage is not empty');
+    const parsedData = JSON.parse(storedData);
+    console.log(parsedData);
+    favoriteList = parsedData;
+    // console.log(favoriteList);
+}
 
 function findSuperHero(){
     
@@ -51,10 +64,11 @@ function findSuperHero(){
         })
         .then((characterData) => {
             const thumbnailUrl = characterData.data.results[0].thumbnail.path + '.' + characterData.data.results[0].thumbnail.extension;
+            const characterName = characterData.data.results[0].name;
 
             searchResult.style.display = 'flex';
             superheroImgContainer.innerHTML = ` 
-                <img id="superhero-img" src="${thumbnailUrl}" alt="Super hero">
+                <img id="superhero-img" src="${thumbnailUrl}" alt="Super hero" data-value="${characterName}">
             `
 
             const descriptionContainer = document.getElementById('description-container');
@@ -62,7 +76,6 @@ function findSuperHero(){
             if(!characterDescription){
                 characterDescription = "Information is Classified";
             }
-            const characterName = characterData.data.results[0].name;
             descriptionContainer.innerHTML = `
                 <h3>
                     ${characterName}
@@ -71,7 +84,6 @@ function findSuperHero(){
                     ${characterDescription}
                 </p>
             `
-
             const comicUrl = `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}`;
             fetch(comicUrl)
             .then((response)=>{
@@ -86,7 +98,7 @@ function findSuperHero(){
                     console.error("Comic not found");
                     return;
                 }
-                console.log(comicsData);
+                // console.log(comicsData);
 
                 const comics = comicsData.data.results;
                 const comicsContainer = document.getElementById('comics-container');
@@ -124,5 +136,72 @@ function findSuperHero(){
     });
 }
 
+function addToFavorite(){
+    const superheroImg = document.getElementById('superhero-img');
+
+    const thumbnailUrl = superheroImg.getAttribute('src');
+    const characterName = superheroImg.getAttribute('data-value');
+
+    let favoriteSuperHero = {
+        thumbnailUrl : thumbnailUrl,
+        characterName : characterName
+    }
+
+    favoriteList.push(favoriteSuperHero);
+    localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+
+    // const favorite = document.createElement('div');
+    
+    // favorite.innerHTML = `
+    //     <div class="favorite">
+    //         <div class="fav-img-container">
+    //             <img class="fav-img" src="${thumbnailUrl}" alt="">
+    //         </div>
+    //         <div class="fav-desc">
+    //             <span>
+    //                 ${characterName}
+    //             </span>
+    //             <button>
+    //                 Remove
+    //             </button>
+    //         </div>
+    //     </div>
+    // `
+    // favoriteContainer.appendChild(favorite);
+    // console.log(favoriteList);
+
+    renderList();
+}
+
+
+function renderList(){
+    favoriteContainer.innerHTML= '';
+    let list = favoriteList;
+    console.log(list);
+    list.forEach((superhero) => {
+        const thumbnailUrl = superhero.thumbnailUrl;
+        const characterName = superhero.characterName;
+
+        const favorite = document.createElement('div');  
+        favorite.innerHTML = `
+            <div class="favorite">
+                <div class="fav-img-container">
+                    <img class="fav-img" src="${thumbnailUrl}" alt="">
+                </div>
+                <div class="fav-desc">
+                    <span>
+                        ${characterName}
+                    </span>
+                    <button>
+                        Remove
+                    </button>
+                </div>
+            </div>
+        `
+        favoriteContainer.appendChild(favorite);
+    });
+}
+
 getCharacter.addEventListener('click', findSuperHero);
+addFavoriteButton.addEventListener('click', addToFavorite);
 
