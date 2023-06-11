@@ -147,8 +147,8 @@ function renderList(){
         const characterName = superhero.characterName;
 
         const favorite = document.createElement('div');  
+        favorite.classList.add('favorite')
         favorite.innerHTML = `
-            <div class="favorite">
                 <div class="fav-img-container">
                     <img class="fav-img" src="${thumbnailUrl}" alt="">
                 </div>
@@ -160,7 +160,6 @@ function renderList(){
                         Remove
                     </button>
                 </div>
-            </div>
         `
         favoriteContainer.appendChild(favorite);
     });
@@ -187,10 +186,41 @@ function addToFavorite(){
         characterName : characterName
     }
 
-    favoriteList.push(favoriteSuperHero);
-    localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
+    //cheking whether favoriteSuperhero already exists
+    const index = favoriteList.findIndex((superhero) => superhero.characterName === favoriteSuperHero.characterName) 
+    
+    if(index === -1){
+        favoriteList.push(favoriteSuperHero);
+        localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
 
-    renderList();
+        const favorite = document.createElement('div');  
+        favorite.classList.add('favorite')
+        favorite.innerHTML = `
+                <div class="fav-img-container">
+                    <img class="fav-img" src="${thumbnailUrl}" alt="">
+                </div>
+                <div class="fav-desc">
+                    <span>
+                        ${characterName}
+                    </span>
+                    <button class="remove-favorite" data-value="${characterName}">
+                        Remove
+                    </button>
+                </div>
+        `
+        favoriteContainer.appendChild(favorite);
+        const removeFavoriteButton = favorite.querySelector('.fav-desc .remove-favorite');
+        removeFavoriteButton.addEventListener('click',function(event){
+            console.log('cliked on remove button');
+            const target = event.target;
+            const name = target.getAttribute('data-value');
+            removeFromFavorite(name);
+        });
+        // renderList();
+    }else{
+        window.alert(`${characterName} is already in your favorite list`);
+    }
+    
 }
 
 function removeFromFavorite(name){
