@@ -63,11 +63,19 @@
     inputValue.addEventListener('input', showAutoSearch);
     autoResultsContainer.addEventListener('click', function(event){
         let target = event.target;
-        console.log(target);
+        // console.log(target);
 
         let name = target.getAttribute('data-value');
+        if(name === null){
+            return;
+        }
         inputValue.value = name;
         findSuperHero();
     });
 
+    window.addEventListener('click', function(){
+        if(autoResultsContainer.style.display != 'none'){
+            autoResultsContainer.style.display = 'none';
+        }
+    });
 })();

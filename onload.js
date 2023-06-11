@@ -87,13 +87,23 @@
     }
     onload();
 
-    superHeroGallery.addEventListener('click', function(event){
+    superHeroGallery.addEventListener('click', function(event){ 
         let target = event.target;
         let name = target.getAttribute('data-value');
-
+        
+        if(name === null){
+            return;
+        }
         inputValue.value = name;
         findSuperHero();
         // console.log(target);
+
+        //for scrolling to the searchResult 
+        const parentDiv = searchResult.parentElement;
+        parentDiv.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 
 })();

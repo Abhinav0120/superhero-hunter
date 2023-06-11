@@ -1,3 +1,4 @@
+// required elements
 const getCharacter = document.getElementById('search-button');
 const inputValue = document.getElementById('input-value');
 const superheroImgContainer = document.getElementById('superhero-img-container');
@@ -6,11 +7,11 @@ const autoResultsContainer = document.getElementById('auto-results-container');
 let addFavoriteButton = document.getElementById('add-favorite-button');
 const favoriteContainer = document.getElementById('favorite-container');
 
+// global variables
 let date = new Date();
-// console.log(date.getTime());
 let favoriteList = [];
-// localStorage.setItem('favoriteList',JSON.stringify(favoriteList));
 
+// checking if localStorage is empty or not
 const storedData = localStorage.getItem('favoriteList');
 if (storedData !== null) {
     console.log('localStorage is not empty');
@@ -20,6 +21,7 @@ if (storedData !== null) {
     // console.log(favoriteList);
 }
 
+// find superhero function 
 function findSuperHero(){
     
     if(autoResultsContainer.style.display != 'none'){
@@ -37,6 +39,7 @@ function findSuperHero(){
     const hashValue = hashVal;
     const url = `https://gateway.marvel.com/v1/public/characters?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}&nameStartsWith=${characterName}`;
 
+    // fetching Super hero data like name thumbnail discription comics
     fetch(url)
     .then((response) =>{
         if(!response.ok){
@@ -84,6 +87,12 @@ function findSuperHero(){
                     ${characterDescription}
                 </p>
             `
+            // scrolling to the search result
+            searchResult.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start' // or 'center' for center alignment
+            });
+
             const comicUrl = `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}`;
             fetch(comicUrl)
             .then((response)=>{
@@ -100,8 +109,6 @@ function findSuperHero(){
                     console.error("Comic not found");
                     return;
                 }
-                // console.log(comicsData);
-
                 const comics = comicsData.data.results;
                 comics.forEach((comic)=>{
                    
@@ -135,9 +142,7 @@ function findSuperHero(){
     });
 }
 
-
-// let removeFavoriteButtons = [];
-
+// renderList function for rendering superheros from favoriteList
 function renderList(){
     favoriteContainer.innerHTML= '';
     let list = favoriteList;
@@ -175,6 +180,7 @@ function renderList(){
     });
 }
 
+// addToFavorite function to add super hero to favoriteList
 function addToFavorite(){
     const superheroImg = document.getElementById('superhero-img');
 
@@ -223,6 +229,7 @@ function addToFavorite(){
     
 }
 
+// removeFromFavorite function to remove superhero from favoriteList
 function removeFromFavorite(name){
     console.log('removing from favorite');
     const index = favoriteList.findIndex((superhero) => superhero.characterName === name);
