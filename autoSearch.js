@@ -1,9 +1,7 @@
 (()=>{
-    // const inputValue = document.getElementById('input-value');
-    // const autoResultsContainer = document.getElementById('auto-results-container');
-    
-    function showAutoSearch(){  
 
+    // To auto search and show the similar result while user entering input
+    function showAutoSearch(){  
         let characterName = inputValue.value.trim();
         if(characterName === ''){
             console.error('please enter a character name');
@@ -13,7 +11,6 @@
         const timeStamp = ts;
         const apiKey = publicKey;
         const hashValue = hashVal;
-        // const url = `https://gateway.marvel.com/v1/public/characters?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}&nameStartWith=${characterName}`;
         const url = `https://gateway.marvel.com/v1/public/characters?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}&nameStartsWith=${characterName}`;
 
         fetch(url)
@@ -30,8 +27,6 @@
                 return;
             }
 
-            // console.log(data);
-            
             const superheroes = data.data.results;
             autoResultsContainer.innerHTML = '';
             autoResultsContainer.style.display = 'block'
@@ -51,31 +46,30 @@
                     </div>
                 `
                 autoResultsContainer.appendChild(autoResult);
-                
             });
-
         })
         .catch((error) =>{
             console.error(error);
         });
     }
 
+    // for getting all the data of sected superhero
     inputValue.addEventListener('input', showAutoSearch);
     autoResultsContainer.addEventListener('click', function(event){
         let target = event.target;
-        // console.log(target);
-
         let name = target.getAttribute('data-value');
-        if(name === null){
-            return;
-        }
+        // if(name === null){
+        //     return;
+        // }
         inputValue.value = name;
         findSuperHero();
     });
 
+    // hiding the autoResultsContainer when user no longer need it
     window.addEventListener('click', function(){
         if(autoResultsContainer.style.display != 'none'){
             autoResultsContainer.style.display = 'none';
         }
     });
+
 })();

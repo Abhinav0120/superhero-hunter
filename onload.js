@@ -4,38 +4,17 @@
 
     function onload(){
         // for rendering favorite super heros
-        let list = favoriteList;
-        console.log(list);
-        // list.forEach((superhero) => {
-        //     const thumbnailUrl = superhero.thumbnailUrl;
-        //     const characterName = superhero.characterName;
-
-        //     const favorite = document.createElement('div');  
-        //     favorite.innerHTML = `
-        //         <div class="favorite">
-        //             <div class="fav-img-container">
-        //                 <img class="fav-img" src="${thumbnailUrl}" alt="">
-        //             </div>
-        //             <div class="fav-desc">
-        //                 <span>
-        //                     ${characterName}
-        //                 </span>
-        //                 <button>
-        //                     Remove
-        //                 </button>
-        //             </div>
-        //         </div>
-        //     `
-        //     favoriteContainer.appendChild(favorite);
-        // });
-
+        // let list = favoriteList;
         renderList();
+
+        // displaying available super heros
         const timeStamp = ts;
         const apiKey = publicKey; 
         const hashValue = hashVal;
         const limit = 40;
         const url = `https://gateway.marvel.com/v1/public/characters?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}&limit=${limit}`;
-    
+        
+        // fetching superheros data
         fetch(url)
         .then((response)=>{
             if(!response.ok){
@@ -50,10 +29,7 @@
                 return;
             }
 
-            // console.log(data);
-
             const superheroes = data.data.results;
-
             superheroes.forEach((superhero)=>{
                 // Create a contianer for each superhero
                 const superheroContainer = document.createElement('div');
@@ -90,13 +66,11 @@
     superHeroGallery.addEventListener('click', function(event){ 
         let target = event.target;
         let name = target.getAttribute('data-value');
-        
         if(name === null){
             return;
         }
         inputValue.value = name;
         findSuperHero();
-        // console.log(target);
 
         //for scrolling to the searchResult 
         const parentDiv = searchResult.parentElement;

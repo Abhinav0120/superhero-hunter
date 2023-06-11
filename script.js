@@ -87,12 +87,10 @@ function findSuperHero(){
                     ${characterDescription}
                 </p>
             `
-            // scrolling to the search result
             searchResult.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start' // or 'center' for center alignment
             });
-
             const comicUrl = `https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${hashValue}`;
             fetch(comicUrl)
             .then((response)=>{
@@ -104,6 +102,7 @@ function findSuperHero(){
             })
             .then((comicsData)=>{
                 const comicsContainer = document.getElementById('comics-container');
+                comicsContainer.innerHTML = '';
                 if(comicsData.data.results.length === 0){
                     comicsContainer.innerHTML = '<h1> No comics found </h1>';
                     console.error("Comic not found");
@@ -172,7 +171,6 @@ function renderList(){
     let removeFavoriteButtons = document.querySelectorAll('.remove-favorite');
     removeFavoriteButtons.forEach((button)=>{
         button.addEventListener('click', function(event){
-            console.log('cliked on remove button');
             const target = event.target;
             const name = target.getAttribute('data-value');
             removeFromFavorite(name);
@@ -217,12 +215,10 @@ function addToFavorite(){
         favoriteContainer.appendChild(favorite);
         const removeFavoriteButton = favorite.querySelector('.fav-desc .remove-favorite');
         removeFavoriteButton.addEventListener('click',function(event){
-            console.log('cliked on remove button');
             const target = event.target;
             const name = target.getAttribute('data-value');
             removeFromFavorite(name);
         });
-        // renderList();
     }else{
         window.alert(`${characterName} is already in your favorite list`);
     }
@@ -236,14 +232,12 @@ function removeFromFavorite(name){
     if (index !== -1) {
         favoriteList.splice(index, 1);
         localStorage.setItem('favoriteList', JSON.stringify(favoriteList));
-        // renderList();
 
         // Remove the corresponding element from the HTML
         const favoriteElements = document.querySelectorAll('.favorite');
         favoriteElements.forEach((element) => {
             const characterName = element.querySelector('.fav-desc span').textContent.trim();
             if (characterName === name) {
-                console.log(characterName);
                 element.remove();
             }
         });
@@ -251,12 +245,5 @@ function removeFromFavorite(name){
 }
 getCharacter.addEventListener('click', findSuperHero);
 addFavoriteButton.addEventListener('click', addToFavorite);
-// removeFavoriteButtons.forEach((button)=>{
-//     button.addEventListener('click', function(event){
-//         console.log('cliked on remove button');
-//         const target = event.target;
-//         const name = target.getAttribute('data-value');
-//         removeFromFavorite(name);
-//     })
-// });
+
 

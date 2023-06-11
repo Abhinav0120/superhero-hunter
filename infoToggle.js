@@ -1,3 +1,4 @@
+// Toggle between info and comics section
 (() =>{
     const options = document.getElementById('options');
     const description = document.getElementById('description-container');

@@ -89,6 +89,9 @@ main #search-section{
     object-fit: cover;
 }
 
+#auto-results-container .character-desc{
+    min-width: 60%;
+}
 
 
 /*---- search result -----*/
