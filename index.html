@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href=""> -->
+<!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -14,10 +17,10 @@
     </header>
     <main>
         <section id="search-section">
-            <div id="input-wrapper">
+            <!-- <div id="input-wrapper"> -->
                 <input type="text" id="input-value">
                 <button id="search-button"> Search </button>
-            </div>
+            <!-- </div> -->
         </section>
         <div id="auto-results-container">
             <div class="auto-result">
@@ -36,12 +39,15 @@
                 </div>
                 <div id="info">
                     <div id="options">
-                        <button id="description-button">
-                            info
-                        </button>
-                        <button id="comics-button">
-                            comics
-                        </button>
+                        <div>
+                            <button id="description-button">
+                                info
+                            </button>
+                            <button id="comics-button">
+                                comics
+                            </button>
+                        </div>
+                        
                         <button id="add-favorite-button">
                             Add to favorite
                         </button>
