@@ -12,9 +12,16 @@
         if(target == descriptionButton){
             comics.style.display = 'none';
             description.style.display = 'block';
+
+            descriptionButton.style.backgroundColor = "#cdfff9a8";
+            comicButton.style.backgroundColor = "#cdfff95c";
+
         }else if(target == comicButton){
             description.style.display = 'none';
             comics.style.display = 'flex';
+            
+            comicButton.style.backgroundColor = "#cdfff9a8";
+            descriptionButton.style.backgroundColor = "#cdfff95c";
         }
     });
 })();

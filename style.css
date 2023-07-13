@@ -15,12 +15,13 @@ header{
     align-items: center;
     position: sticky;
     top: 0px;
+    gap: 10%
 }
 
 header #logo{
     height: 70%;
     border: 1px solid white;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 /* ----- Main ----- */
@@ -28,7 +29,7 @@ main{
     width: 70%;
     height: 90vh;
     /* background-color: #200202; */
-    background-color: #190000;
+    background-color: #220101;
 
     
 }
@@ -42,6 +43,17 @@ main{
     display: flex;
     align-items: center;
     margin-left: 15px;
+}
+
+#search-section #search-logo-wrapper{
+    height: 50px;
+    font-size: 2rem;
+    border-radius: 5px 0px 0px 5px;
+    border: none;
+    background-color: #df6d6dbd;
+    padding: 1px 10px;
+    color: white;
+
 }
 
 /* #search-section #input-wrapper{
@@ -78,7 +90,7 @@ main{
 #search-section #input-value{
     height: 50px;
     font-size: 2rem;
-    border-radius: 5px 0px 0px 5px;
+    /* border-radius: 5px 0px 0px 5px; */
     border: none;
     /* margin-left: 15px; */
     /* margin-right: 5px; */
@@ -108,7 +120,7 @@ input:focus-visible {
     /* border-bottom: 4px solid #dfdfdf; */
     font-family: inherit;
     font-weight: 500;
-    padding: 5px;
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -118,13 +130,15 @@ input:focus-visible {
 /* auto search result */
 #auto-results-container{
     position: absolute;
-    left: 160px;
+    /* left: 160px; */
+    left: calc(167px + 10%);
+    top: 10%;
     width: 25vw;
     max-height: 50vh;
     overflow: scroll;
     /* background-color: grey; */
     display: none;
-    /* z-index: 1; */
+    z-index: 1;
 }
 
 #auto-results-container::-webkit-scrollbar{
@@ -138,11 +152,15 @@ input:focus-visible {
     display: flex;
     margin-bottom: 5px;
     /* background: rgb(109 33 33 / 93%); */
-    background-color: rgb(69 16 16 / 82%);
+    /* background-color: rgb(168 55 57 / 70%); */
+    background-color: rgb(101 13 15 / 92%);
     color: white;
     border-radius: 5px;
     cursor: pointer;
+}
 
+#auto-results-container .auto-result:hover{
+    background-color: rgb(135 34 36 / 92%);
 }
 
 #auto-results-container .character-img-container{
@@ -222,10 +240,22 @@ input:focus-visible {
     cursor: pointer;
 }
 
+#info #description-button{
+    background-color: #cdfff9a8;
+}
+
+#info button:hover{
+    background-color:#cdfff9a8;
+}
+
+
 #info #add-favorite-button{
     background-color: #ff7b31;
     margin-right: 10px;
+}
 
+#info #add-favorite-button:hover{
+    background-color: #ff9559;
 }
 
 #info #description-container{
@@ -277,6 +307,8 @@ input:focus-visible {
     display: block;
     /* width: 100%; */
 }
+
+
 /* ---- gallery section ---- */
 
 #gallery-section{
@@ -301,7 +333,17 @@ input:focus-visible {
     border-radius: 10px;
     margin-bottom: 15px;
     color: white;
+    /* box-shadow: 0px 0px 10px 1px #000000de; */
+    opacity: 85%;
+    cursor: pointer;
+}
+
+#gallery-section .superhero-container:hover{
+    /* background-color: rgb(255 255 255 / 15%); */
     box-shadow: 0px 0px 10px 1px #000000de;
+    opacity: 100%;
+    transform: scale(1.01);
+
 }
 
 .superhero-Thumbnail{
