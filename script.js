@@ -219,6 +219,12 @@ function addToFavorite(){
             const name = target.getAttribute('data-value');
             removeFromFavorite(name);
         });
+
+        favoriteContainer.scrollTo({
+            top: favoriteContainer.scrollHeight,
+            behavior: "smooth"
+
+        });
     }else{
         window.alert(`${characterName} is already in your favorite list`);
     }
@@ -241,6 +247,7 @@ function removeFromFavorite(name){
                 element.remove();
             }
         });
+
     }
 }
 getCharacter.addEventListener('click', findSuperHero);

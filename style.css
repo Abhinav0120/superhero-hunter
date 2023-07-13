@@ -389,7 +389,8 @@ aside #favorite-container::-webkit-scrollbar{
 aside .favorite{
     display: flex;
     width: 85%;
-    background-color:rgb(255 255 255 / 16%);
+    /* background-color:rgb(255 255 255 / 16%); */
+    background-color: rgb(255 255 255 / 9%);;
     justify-content: space-between;
     margin: auto;
     border-radius: 10px;
@@ -433,4 +434,12 @@ aside .favorite{
     font-size: 1.3rem;
     border: none;
     background-color: #bd5c469e;
+    
 }
+
+.remove-favorite:hover{
+    /* background-color: #d97059c9; */
+    background-color: #df1515;
+
+}
+
