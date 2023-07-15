@@ -1,7 +1,6 @@
 (() => { 
     superHeroGallery = document.getElementById('gallery-section');
 
-
     function onload(){
         // for rendering favorite super heros
         // let list = favoriteList;
